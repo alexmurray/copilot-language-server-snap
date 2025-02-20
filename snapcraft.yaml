@@ -1,6 +1,6 @@
 name: copilot-language-server
 base: core24
-adopt-info: copilot-language-server
+version: "1.273.0"
 summary: Github Copilot Language Server
 description: |
   GitHub Copilot uses OpenAI Codex to suggest code and entire functions in
@@ -41,11 +41,10 @@ parts:
         ARCH=$SNAP_ARCH
       fi
       curl -s https://nodejs.org/dist/"${NODEJS_VERSION}"/node-"${NODEJS_VERSION}"-linux-$ARCH.tar.gz | tar xzf - -C "$SNAPCRAFT_PART_INSTALL" --strip-components=1
-      PATH=$SNAPCRAFT_PART_INSTALL/bin:$PATH npm install -g --prefix $SNAPCRAFT_PART_INSTALL --install-links @github/copilot-language-server
+      PATH=$SNAPCRAFT_PART_INSTALL/bin:$PATH npm install -g --prefix $SNAPCRAFT_PART_INSTALL --install-links @github/copilot-language-server@$SNAPCRAFT_PROJECT_VERSION
       # symlink so we can specify the apps.copilot-language-server.command above
       # without an @ symbol
       ln -s @github $SNAPCRAFT_PART_INSTALL/lib/node_modules/github
-      craftctl set version=$(jq -r .version $SNAPCRAFT_PART_INSTALL/lib/node_modules/github/copilot-language-server/package.json)
     prime:
       - -lib/node_modules/@github/copilot-language-server/dist/compiled
       - -lib/node_modules/@github/copilot-language-server/native
