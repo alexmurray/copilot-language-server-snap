@@ -26,7 +26,7 @@ parts:
     plugin: nil
     source: .
     build-environment:
-      - NODEJS_VERSION: "v22.13.0"
+      - NODEJS_VERSION: "v22.14.0"
     build-packages:
       - curl
       - jq
