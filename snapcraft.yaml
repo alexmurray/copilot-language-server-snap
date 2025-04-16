@@ -47,6 +47,5 @@ parts:
       # without an @ symbol
       ln -s @github $SNAPCRAFT_PART_INSTALL/lib/node_modules/github
     prime:
-      - -lib/node_modules/@github/copilot-language-server/dist/compiled
       - -lib/node_modules/@github/copilot-language-server/native
       - -dist/compiled
