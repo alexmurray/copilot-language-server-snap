@@ -42,7 +42,7 @@ parts:
         ARCH=$SNAP_ARCH
       fi
       curl -s https://nodejs.org/dist/"${NODEJS_VERSION}"/node-"${NODEJS_VERSION}"-linux-$ARCH.tar.gz | tar xzf - -C "$SNAPCRAFT_PART_INSTALL" --strip-components=1
-      PATH=$SNAPCRAFT_PART_INSTALL/bin:$PATH npm install -g --prefix $SNAPCRAFT_PART_INSTALL --install-links @github/copilot-language-server@$SNAPCRAFT_PROJECT_VERSION
+      PATH=$SNAPCRAFT_PART_INSTALL/bin:$PATH npm install -g --prefix $SNAPCRAFT_PART_INSTALL --install-links @github/copilot-language-server@$CRAFT_PROJECT_VERSION
       # symlink so we can specify the apps.copilot-language-server.command above
       # without an @ symbol
       ln -s @github $SNAPCRAFT_PART_INSTALL/lib/node_modules/github
