@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/canonical/snapcraft/main/schema/snapcraft.json
 name: copilot-language-server
 base: core24
-version: 1.474.0
+version: 1.481.0
 summary: Github Copilot Language Server
 description: |
   GitHub Copilot uses OpenAI Codex to suggest code and entire functions in
