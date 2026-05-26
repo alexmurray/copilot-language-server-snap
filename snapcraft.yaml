@@ -1,6 +1,6 @@
 name: copilot-language-server
 base: core24
-version: 1.495.1
+version: 1.495.2
 summary: Github Copilot Language Server
 description: |
   GitHub Copilot uses OpenAI Codex to suggest code and entire functions in
