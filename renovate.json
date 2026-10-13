@@ -1,0 +1,58 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "dependencyDashboard": true,
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track the upstream copilot-language-server npm release",
+      "managerFilePatterns": [
+        "/^snapcraft\\.yaml$/"
+      ],
+      "matchStrings": [
+        "\\nversion: (?<currentValue>\\S+)\\n"
+      ],
+      "depNameTemplate": "@github/copilot-language-server",
+      "datasourceTemplate": "npm"
+    },
+    {
+      "customType": "regex",
+      "description": "Track the upstream Node.js release used to run the server",
+      "managerFilePatterns": [
+        "/^snapcraft\\.yaml$/"
+      ],
+      "matchStrings": [
+        "NODEJS_VERSION: \"v(?<currentValue>[^\"]+)\""
+      ],
+      "depNameTemplate": "node",
+      "datasourceTemplate": "node-version",
+      "versioningTemplate": "node"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Match the existing commit message style for upstream releases",
+      "matchDepNames": [
+        "@github/copilot-language-server"
+      ],
+      "separateMajorMinor": false,
+      "commitMessagePrefix": "snapcraft.yaml:",
+      "commitMessageAction": "update to",
+      "commitMessageTopic": "latest upstream release",
+      "commitMessageExtra": "{{newValue}}"
+    },
+    {
+      "description": "Only move to Node.js LTS releases (the node versioning treats non-LTS as unstable)",
+      "matchDepNames": [
+        "node"
+      ],
+      "separateMajorMinor": false,
+      "commitMessagePrefix": "snapcraft.yaml:",
+      "commitMessageAction": "update to",
+      "commitMessageTopic": "latest upstream nodejs LTS release",
+      "commitMessageExtra": "{{newValue}}"
+    }
+  ]
+}
