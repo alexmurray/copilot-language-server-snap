@@ -1,0 +1,34 @@
+name: Build and test snap
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: canonical/setup-lxd@v1
+
+      - name: Install snapcraft
+        run: sudo snap install snapcraft --classic
+
+      # packs the snap and runs the spread tests from spread.yaml; with CI set
+      # the craft backend runs them directly on this runner
+      - name: Build and test
+        run: snapcraft test --verbose
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: snap-${{ matrix.runner }}
+          path: "*.snap"
+          retention-days: 7

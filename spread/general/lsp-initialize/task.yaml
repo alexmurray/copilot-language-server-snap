@@ -1,0 +1,4 @@
+summary: Perform an LSP initialize handshake over stdio
+
+execute: |
+  timeout 120 python3 lsp-smoke-test.py copilot-language-server

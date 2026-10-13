@@ -1,0 +1,22 @@
+project: copilot-language-server
+
+backends:
+  craft:
+    type: craft
+    # in CI only the system matching the runner is used
+    systems:
+      - ubuntu-24.04
+      - ubuntu-26.04
+
+suites:
+  spread/general/:
+    summary: General integration tests
+    prepare: |
+      snap install "$CRAFT_ARTIFACT" --dangerous
+    restore: |
+      snap remove copilot-language-server --purge --terminate
+
+exclude:
+  - .git
+
+kill-timeout: 1h

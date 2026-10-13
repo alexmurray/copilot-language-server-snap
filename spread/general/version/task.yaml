@@ -1,0 +1,7 @@
+summary: Check the server reports the version from snapcraft.yaml
+
+execute: |
+  expected=$(sed -n 's/^version: //p' "$PROJECT_PATH/snapcraft.yaml")
+  actual=$(copilot-language-server --version)
+  echo "expected=$expected actual=$actual"
+  test "$expected" = "$actual"
