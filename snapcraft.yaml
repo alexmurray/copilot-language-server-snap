@@ -30,6 +30,9 @@ parts:
     build-packages:
       - curl
       - jq
+    # nodejs >= 25 official binaries are linked against libatomic
+    stage-packages:
+      - libatomic1
     override-build: |
       # install the official nodejs so we get the expected npm version
       if [ $SNAP_ARCH == "amd64" ]; then
